@@ -17,9 +17,13 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 		"shahbakhshtayyeb@gmail.com</a></p>")
 }
 
+func pathHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, r.URL.Path)
+}
+
 func main() {
-	http.HandleFunc("/", homeHandler)
-	http.HandleFunc("/contact", contactHandler)
+	http.HandleFunc("/", pathHandler)
+	//http.HandleFunc("/contact", contactHandler)
 	fmt.Println("Starting the server on port :3000")
 	http.ListenAndServe(":3000", nil)
 }
