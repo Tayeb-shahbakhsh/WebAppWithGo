@@ -5,12 +5,21 @@ import (
 	"net/http"
 )
 
-func handlerFunc(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "<h1>Welcome to tayeb's first web application with Go</h1>")
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprint(w, "<h1>Welcome to my first web application with Go</h1>")
+}
+
+func contactHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	fmt.Fprint(w, "<h1>Contact page.</h1><p>to get in touch email me at"+
+		" <a href=\"shahbakhshtayyeb@gmail.com\">"+
+		"shahbakhshtayyeb@gmail.com</a></p>")
 }
 
 func main() {
-	http.HandleFunc("/", handlerFunc)
+	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/contact", contactHandler)
 	fmt.Println("Starting the server on port :3000")
 	http.ListenAndServe(":3000", nil)
 }
